@@ -16,6 +16,15 @@ function operate(a, b, operator) {
   }
 }
 
+document.querySelectorAll(".numberButton").forEach(function(element) {
+  element.addEventListener('click', numClick)
+});
+
+function numClick() {
+  let btnText = this.textContent;
+  console.log(btnText);
+}
+
 // MATH
 
 function add(a, b) {
