@@ -1,9 +1,5 @@
-let a;
-let b;
-let operator;
 let displayText = document.querySelector('.displayText');
-let displayValue = ['12', '-', '14'];
-updateDisplay();
+let displayValue = "";
 
 // Create an array for the current operation
 // array[0] will be the first number, [1] the operator, [2] the second num
@@ -12,18 +8,24 @@ updateDisplay();
 // When number or operator button is pressed, call updateDisplay()
 
 
-function operate(displayValue) {
-  if (displayValue[1] == "+") {
-    return add(displayValue);
-  } else if (displayValue[1] == "-") {
-    return subtract(displayValue);
-  } else if (displayValue[1] == "*") {
-    return multiply(displayValue);
-  } else if (displayValue[1] == "/") {
-    return divide(displayValue);
-  } else if (displayValue[1] == "sqr") {
-    return square(displayValue);
+function operate() {
+  let equationArr = displayValue.split(" ");
+  let a = Number(equationArr[0]);
+  let b = Number(equationArr[2]);
+
+  if (equationArr[1] == "+") {
+    displayValue = add(a, b);
+  } else if (equationArr[1] == "-") {
+    displayValue = subtract(a, b);
+  } else if (equationArr[1] == "*") {
+    displayValue = multiply(a, b);
+  } else if (equationArr[1] == "÷") {
+    displayValue = divide(a, b);
+  } else if (equationArr[1] == "sqr") {
+    displayValue = square(displayValue);
   }
+
+  updateDisplay(displayValue);
 }
 
 document.querySelectorAll(".numberButton").forEach(function(element) {
@@ -32,7 +34,8 @@ document.querySelectorAll(".numberButton").forEach(function(element) {
 
 function numClick() {
   let btnText = this.textContent;
-  console.log(btnText);
+  displayValue += btnText;
+  updateDisplay(displayValue);
 }
 
 document.querySelectorAll(".operatorButton").forEach(function(element) {
@@ -41,29 +44,32 @@ document.querySelectorAll(".operatorButton").forEach(function(element) {
 
 function opClick() {
   let btnText = this.textContent;
-  console.log(btnText);
+  displayValue += ` ${btnText} `;
+  updateDisplay(displayValue);
 }
 
-function updateDisplay() {
-  displayText.textContent = `${displayValue[0]} ${displayValue[1]} ${displayValue[2]}`
+function updateDisplay(displayValue) {
+  displayText.textContent = `${displayValue}`;
 }
+
+document.querySelector("#evaluate").addEventListener(`click`, operate)
 
 // MATH
 
-function add(displayValue) {
-  return displayValue[0] + displayValue[2];
+function add(a, b) {
+  return a + b;
 }
 
-function subtract(displayValue) {
-  return displayValue[0] - displayValue[2];
+function subtract(a, b) {
+  return a - b;
 }
 
-function multiply(displayValue) {
-  return displayValue[0] * displayValue[2];
+function multiply(a, b) {
+  return a * b;
 }
 
-function divide(displayValue) {
-  return displayValue[0] / displayValue[2];
+function divide(a, b) {
+  return a / b;
 }
 
 function square(displayValue) {
