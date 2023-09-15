@@ -13,6 +13,8 @@ function operate() {
     displayValue = subtract(a, b);
   } else if (equationArr[1] == "*") {
     displayValue = multiply(a, b);
+  } else if (equationArr[1] == "÷" && equationArr[2] == "0") {
+    displayValue = "NO!!";
   } else if (equationArr[1] == "÷") {
     displayValue = divide(a, b);
   }
@@ -29,7 +31,7 @@ document.querySelectorAll(".numberButton").forEach(function(element) {
 function numClick() {
   let btnText = this.textContent;
 
-  if (displayValue == "Thank you!!" || displayValue == "0") {
+  if (displayValue == "Thank you!!" || displayValue == "0" || displayValue == "NO!!") {
     displayValue = btnText
     updateDisplay(displayValue);
   } else {
@@ -46,7 +48,7 @@ function opClick() {
   let equationArr = displayValue.split(" ");
   let btnText = this.textContent;
 
-  if (displayValue == "Thank you!!") {
+  if (displayValue == "Thank you!!" || displayValue == "NO!!") {
     displayValue = "0";
     updateDisplay(displayValue);
     return;
@@ -58,6 +60,9 @@ function opClick() {
     return;
   } else {
     operate();
+    if (displayValue == "NO!!") {
+      return
+    }
     displayValue += ` ${btnText} `;
   }
   updateDisplay(displayValue);
