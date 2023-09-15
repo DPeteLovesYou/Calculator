@@ -85,8 +85,13 @@ document.querySelector("#clear").addEventListener('click', () => {
 })
 
 document.querySelector("#backSpace").addEventListener('click', () => {
-  displayValue = displayValue.slice(0, -1);
-  updateDisplay(displayValue);
+  if (displayValue == "Thank you!!" || displayValue == "NO!!" || displayValue == "0" || displayValue.length == 1) {
+    displayValue = "0";
+    updateDisplay(displayValue);
+  } else {
+    displayValue = displayValue.slice(0, -1);
+    updateDisplay(displayValue);
+  }
 })
 
 document.querySelector("#period").addEventListener('click', () => {
