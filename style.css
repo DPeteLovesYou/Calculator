@@ -67,3 +67,7 @@ button:hover {
   scale: 1.015;
   background-color: #cc9ab5;
 }
+
+#zero {
+  width: 288px;
+}
