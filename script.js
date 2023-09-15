@@ -79,6 +79,11 @@ document.querySelector("#clear").addEventListener('click', () => {
   updateDisplay(displayValue);
 })
 
+document.querySelector("#backSpace").addEventListener('click', () => {
+  displayValue = displayValue.slice(0, -1);
+  updateDisplay(displayValue);
+})
+
 // MATH
 
 function add(a, b) {
