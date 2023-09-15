@@ -89,6 +89,18 @@ document.querySelector("#backSpace").addEventListener('click', () => {
   updateDisplay(displayValue);
 })
 
+document.querySelector("#period").addEventListener('click', () => {
+  let equationArr = displayValue.split("");
+
+  if (displayValue == "Thank you!!" || displayValue == "NO!!") {
+    displayValue = "0"
+    updateDisplay(displayValue);
+  } else if (!equationArr.includes(".")) {
+    displayValue += ".";
+    updateDisplay(displayValue);
+  }
+})
+
 // MATH
 
 function add(a, b) {
