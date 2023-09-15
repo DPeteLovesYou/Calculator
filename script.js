@@ -1,18 +1,12 @@
 let displayText = document.querySelector('.displayText');
-let displayValue = "";
-
-// Create an array for the current operation
-// array[0] will be the first number, [1] the operator, [2] the second num
-// When number button is pressed, check if operator has been pressed yet (displayValue[1])
-// If not, write number to displayValue[0], otherwise to displayValue[2]
-// When number or operator button is pressed, call updateDisplay()
-
+let displayValue = "0";
 
 function operate() {
   let equationArr = displayValue.split(" ");
   let a = Number(equationArr[0]);
   let b = Number(equationArr[2]);
 
+  if (equationArr[2]) {
   if (equationArr[1] == "+") {
     displayValue = add(a, b);
   } else if (equationArr[1] == "-") {
@@ -22,7 +16,9 @@ function operate() {
   } else if (equationArr[1] == "÷") {
     displayValue = divide(a, b);
   }
+  }
 
+  displayValue = displayValue.toString();
   updateDisplay(displayValue);
 }
 
@@ -32,8 +28,14 @@ document.querySelectorAll(".numberButton").forEach(function(element) {
 
 function numClick() {
   let btnText = this.textContent;
-  displayValue += btnText;
-  updateDisplay(displayValue);
+
+  if (displayValue == "Thank you!!" || displayValue == "0") {
+    displayValue = btnText
+    updateDisplay(displayValue);
+  } else {
+    displayValue += btnText;
+    updateDisplay(displayValue);
+  }
 }
 
 document.querySelectorAll(".operatorButton").forEach(function(element) {
@@ -44,8 +46,16 @@ function opClick() {
   let equationArr = displayValue.split(" ");
   let btnText = this.textContent;
 
+  if (displayValue == "Thank you!!") {
+    displayValue = "0";
+    updateDisplay(displayValue);
+    return;
+  }
+
   if (equationArr[1] == undefined) {
     displayValue += ` ${btnText} `;
+  } else if (equationArr[2] == '') {
+    return;
   } else {
     operate();
     displayValue += ` ${btnText} `;
@@ -59,8 +69,14 @@ function updateDisplay(displayValue) {
 
 document.querySelector("#evaluate").addEventListener(`click`, operate)
 
-document.querySelector("#exponent").addEventListener('click', (a) => {
-  
+document.querySelector("#compliment").addEventListener('click', () => {
+  displayValue = "Thank you!!";
+  updateDisplay(displayValue);
+})
+
+document.querySelector("#clear").addEventListener('click', () => {
+  displayValue = "0";
+  updateDisplay(displayValue);
 })
 
 // MATH
