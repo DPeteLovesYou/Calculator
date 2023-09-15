@@ -21,8 +21,6 @@ function operate() {
     displayValue = multiply(a, b);
   } else if (equationArr[1] == "÷") {
     displayValue = divide(a, b);
-  } else if (equationArr[1] == "sqr") {
-    displayValue = square(displayValue);
   }
 
   updateDisplay(displayValue);
@@ -43,8 +41,15 @@ document.querySelectorAll(".operatorButton").forEach(function(element) {
 });
 
 function opClick() {
+  let equationArr = displayValue.split(" ");
   let btnText = this.textContent;
-  displayValue += ` ${btnText} `;
+
+  if (equationArr[1] == undefined) {
+    displayValue += ` ${btnText} `;
+  } else {
+    operate();
+    displayValue += ` ${btnText} `;
+  }
   updateDisplay(displayValue);
 }
 
@@ -53,6 +58,10 @@ function updateDisplay(displayValue) {
 }
 
 document.querySelector("#evaluate").addEventListener(`click`, operate)
+
+document.querySelector("#exponent").addEventListener('click', (a) => {
+  
+})
 
 // MATH
 
@@ -72,6 +81,6 @@ function divide(a, b) {
   return a / b;
 }
 
-function square(displayValue) {
-  return displayValue[0];
+function square(a) {
+  return a * a;
 }
